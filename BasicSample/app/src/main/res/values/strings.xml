@@ -1,0 +1,32 @@
+<!--
+  Copyright (C) 2018 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<resources>
+    <string name="app_name">BasicSample</string>
+    <string name="likes">Likes</string>
+    <string name="textview">TextView</string>
+    <string name="profile_name">NAME</string>
+    <string name="profile_lastname">LAST NAME</string>
+    <string name="last_name_label">Last name</string>
+    <string name="name_label">Name</string>
+    <string name="profile_avatar_cd">Profile\'s avatar</string>
+    <string name="like">Like</string>
+    <string name="observable_fields_activity_text">Observable Fields activity</string>
+    <string name="viewmodel_activity_text">ViewModel activity</string>
+    <string name="observableactivity_activity_label_text">Uses ObservableFields to automatically refresh the UI and showcases common bad practices</string>
+    <string name="viewmodel_activity_label_text">Uses a ViewModel to hold data and handle user actions, using better alternatives</string>
+    <string name="see_readme">See README.md for details</string>
+</resources>
