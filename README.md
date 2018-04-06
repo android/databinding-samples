@@ -5,12 +5,12 @@ A collection of samples using the [Android Data Binding Library](https://develop
 
 ### Samples
 
-* **[BasicSample](https://github.com/googlesamples/android-databinding/blob/master/BasicSample)** - Shows basic usage of layout expressions, binding adapters,
-and integration with ViewModels
+* **[BasicSample](https://github.com/googlesamples/android-databinding/blob/master/BasicSample)** - (Kotlin) Shows basic usage of layout expressions, binding adapters, and integration with ViewModels.
+* **[TwoWaySample](https://github.com/googlesamples/android-databinding/blob/master/TwoWaySample)** - (Kotlin) Shows usage of two-way data binding, advanced Binding Adapters, animations, converters and inverse converters.
 
 ### Reporting Issues
 
-You can report an [Issue](https://github.com/googlesamples/android-architecture-components/issues) on the samples using this repository. If you find an issue with the Architecture Components, report it using the [Architecture Components Issue Tracker](https://issuetracker.google.com/issues/new?component=197448&template=878802)
+You can report an [Issue](https://github.com/googlesamples/android-databinding/issues) on the samples using this repository. If you find an issue with the Architecture Components, report it using the [Architecture Components Issue Tracker](https://issuetracker.google.com/issues/new?component=197448&template=878802)
 
 License
 -------
