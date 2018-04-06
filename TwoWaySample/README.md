@@ -17,6 +17,8 @@ with an app that shows a workout timer.
 Features
 --------
 
+![Screenshot](https://github.com/googlesamples/android-databinding/blob/master/TwoWaySample/screenshots/screenshot2way.png)
+
 ## Two-way Data Binding
 
 Two-way data binding is used twice in this sample: with a simple case (the toggle start/pause
