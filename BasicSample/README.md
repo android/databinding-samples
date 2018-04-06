@@ -14,7 +14,7 @@ It shows common bad practices and their solutions in two different screens.
 Features
 --------
 
-![Screenshot](https://github.com/googlesamples/android-databinding/blob/NewReadmes/TwoWaySample/screenshots/screenshot2way.png)
+![Screenshot](https://github.com/googlesamples/android-databinding/blob/master/TwoWaySample/screenshots/screenshot2way.png)
 
 ### Layout variables and expressions
 
