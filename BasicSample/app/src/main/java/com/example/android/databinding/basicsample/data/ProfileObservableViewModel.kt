@@ -70,9 +70,11 @@ class ProfileObservableFieldsViewModel : ViewModel() {
         likes.set(likes.get() + 1)
 
         popularity.set(likes.get().let {
-            if (it > 9) Popularity.STAR
-            if (it > 4) Popularity.POPULAR
-            Popularity.NORMAL
+            when {
+                it > 9 -> Popularity.STAR
+                it > 4 -> Popularity.POPULAR
+                else -> Popularity.NORMAL
+            }
         })
     }
 }
