@@ -43,13 +43,7 @@ class ProfileObservableViewModel : ObservableViewModel() {
 
     @Bindable
     fun getPopularity(): Popularity {
-        return likes.get().let {
-            when {
-                it > 9 -> Popularity.STAR
-                it > 4 -> Popularity.POPULAR
-                else -> Popularity.NORMAL
-            }
-        }
+        return likes.get().let { decidePopularity(it) }
     }
 }
 
@@ -69,13 +63,9 @@ class ProfileObservableFieldsViewModel : ViewModel() {
     fun onLike() {
         likes.set(likes.get() + 1)
 
-        popularity.set(likes.get().let {
-            when {
-                it > 9 -> Popularity.STAR
-                it > 4 -> Popularity.POPULAR
-                else -> Popularity.NORMAL
-            }
-        })
+        popularity.set(
+                likes.get().let { decidePopularity(it) }
+        )
     }
 }
 
@@ -87,4 +77,12 @@ enum class Popularity {
 
 private fun ObservableInt.increment() {
     set(get() + 1)
+}
+
+private fun decidePopularity(likes: Int) : Popularity {
+    return when {
+        likes > 9 -> Popularity.STAR
+        likes > 4 -> Popularity.POPULAR
+        else -> Popularity.NORMAL
+    }
 }
