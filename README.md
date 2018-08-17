@@ -1,4 +1,4 @@
-Android Architecture Components samples
+Android Data Binding Library samples
 ===================================
 
 A collection of samples using the [Android Data Binding Library](https://developer.android.com/topic/libraries/data-binding/index.html):
@@ -8,9 +8,14 @@ A collection of samples using the [Android Data Binding Library](https://develop
 * **[BasicSample](https://github.com/googlesamples/android-databinding/blob/master/BasicSample)** - (Kotlin) Shows basic usage of layout expressions, binding adapters, and integration with ViewModels.
 * **[TwoWaySample](https://github.com/googlesamples/android-databinding/blob/master/TwoWaySample)** - (Kotlin) Shows usage of two-way data binding, advanced Binding Adapters, animations, converters and inverse converters.
 
+### Other samples
+
+* **[Android Architecture Blueprints (todo-mvvm-databinding branch)](https://github.com/googlesamples/android-architecture/tree/todo-mvvm-databinding/)** - Shows basic Data Binding usage with the Model‑View‑ViewModel pattern.
+* **[Android Sunflower](https://github.com/googlesamples/android-sunflower)** - A gardening app illustrating Android development best practices with Android Jetpack, including Data Binding.
+
 ### Reporting Issues
 
-You can report an [Issue](https://github.com/googlesamples/android-databinding/issues) on the samples using this repository. If you find an issue with the Architecture Components, report it using the [Architecture Components Issue Tracker](https://issuetracker.google.com/issues/new?component=197448&template=878802)
+You can report an [Issue](https://github.com/googlesamples/android-databinding/issues) on the samples using this repository. If you find an issue with the library related to build, report it using the [Gradle Plugin issue tracker](https://b.corp.google.com/issues/new?component=192709&template=842921). If it's related to the Android Studio integration, report it using the [Android Studio issue tracker](https://b.corp.google.com/issues/new?component=192708&template=840533).
 
 License
 -------
