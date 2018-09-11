@@ -26,7 +26,7 @@ import com.example.android.databinding.basicsample.data.ObservableFieldProfile
 import com.example.android.databinding.basicsample.databinding.ObservableFieldProfileBinding
 
 /**
- * This activity shows the same data as [PojoActivity] but it lets the user increment the
+ * This activity shows shows static data and lets the user increment the
  * number of likes by clicking a button. See [ViewModelActivity] for a better implementation.
  */
 class ObservableFieldActivity : AppCompatActivity() {
