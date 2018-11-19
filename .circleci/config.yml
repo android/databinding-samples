@@ -41,3 +41,9 @@ jobs:
           command: |
             sudo pip install -U crcmod
             sudo gsutil -m cp -r -U `sudo gsutil ls gs://[BUCKET_NAME]/[OBJECT_NAME] | tail -1` ${CIRCLE_ARTIFACTS}/ | true
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - test
