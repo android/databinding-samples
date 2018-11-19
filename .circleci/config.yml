@@ -28,16 +28,16 @@ jobs:
       - run:
           name: Test BasicSample with Firebase Test Lab
           command: >
-            sudo gcloud firebase test android run
-              --app BasicSample/app/build/outputs/apk/debug/app-debug.apk
-              --test BasicSample/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
+            sudo gcloud firebase test android run \
+              --app BasicSample/app/build/outputs/apk/debug/app-debug.apk \
+              --test BasicSample/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk \
               --results-bucket cloud-test-${GOOGLE_PROJECT_ID}
       - run:
           name: Test 2-way sample with Firebase Test Lab
           command: >
-            sudo gcloud firebase test android run
-              --app TwoWaySample/app/build/outputs/apk/debug/app-debug.apk
-              --test TwoWaySample/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
+            sudo gcloud firebase test android run \ 
+              --app TwoWaySample/app/build/outputs/apk/debug/app-debug.apk \ 
+              --test TwoWaySample/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk \
               --results-bucket cloud-test-${GOOGLE_PROJECT_ID}
       - run:
           name: Install gsutil dependency and copy test results data
