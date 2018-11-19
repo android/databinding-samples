@@ -19,7 +19,7 @@ jobs:
             cd ..
       - run:
           name: Store Google Service Account
-          command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+          command: echo $GCLOUD_SERVICE_KEY | base64 -di > ${HOME}/gcloud-service-key.json
       - run:
           name: Authorize gcloud and set config defaults
           command: |
