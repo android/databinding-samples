@@ -3,7 +3,10 @@ jobs:
   test:
     docker:
       - image: circleci/android:api-28-alpha  # gcloud is baked into this image
+    environment:
+      JVM_OPTS: -Xmx3200m
     steps:
+      - checkout
       - run:
           name: Build debug APK and release APK
           command: |
