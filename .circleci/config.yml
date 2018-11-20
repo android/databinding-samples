@@ -1,8 +1,14 @@
-version: 2
-jobs:
-  build_and_setup:
+version: 2.1
+
+executors:
+  android-executor:
     docker:
       - image: circleci/android:api-28-alpha  # gcloud is baked into this image
+    working_directory: ~/project
+
+jobs:
+  build_and_setup:
+    executor: android-executor
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
@@ -25,10 +31,15 @@ jobs:
           command: |
             sudo gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
             sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+      - persist_to_workspace:
+          root: .
+          paths:
+            - ./*/build
   test1:
-    docker:
-      - image: circleci/android:api-28-alpha  # gcloud is baked into this image
+    executor: android-executor
     steps:
+      - attach_workspace:
+          at: project
       - run:
           name: Test BasicSample with Firebase Test Lab
           command: >
@@ -37,9 +48,10 @@ jobs:
               --test BasicSample/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk \
               --results-bucket cloud-test-${GOOGLE_PROJECT_ID}-databindingbasic
   test2:
-    docker:
-      - image: circleci/android:api-28-alpha  # gcloud is baked into this image
+    executor: android-executor
     steps:
+      - attach_workspace:
+          at: project
       - run:
           name: Test 2-way sample with Firebase Test Lab
           command: >
@@ -48,9 +60,10 @@ jobs:
               --test TwoWaySample/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk \
               --results-bucket cloud-test-${GOOGLE_PROJECT_ID}-databindingtwoway
   upload_results:
-    docker:
-      - image: circleci/android:api-28-alpha  # gcloud is baked into this image
+    executor: android-executor
     steps:
+      - attach_workspace:
+          at: project
       - run:
           name: Install gsutil dependency and copy test results data
           command: |
@@ -58,16 +71,14 @@ jobs:
             sudo gsutil -m cp -r -U `sudo gsutil ls gs://[BUCKET_NAME]/[OBJECT_NAME] | tail -1` ${CIRCLE_ARTIFACTS}/ | true
 
 workflows:
-  version: 2
+  version: 2.1
   build_and_test:
     jobs:
       - build_and_setup
       - test1:
-          requires:
-            - build_and_setup
+          requires: build_and_setup
       - test2:
-          requires:
-            - build_and_setup
+          requires: build_and_setup
       - upload_results:
           requires:
             - test1
