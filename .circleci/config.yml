@@ -1,5 +1,16 @@
 version: 2
 
+setup_ftl: &setup_ftl
+  steps:
+    - run:
+      name: Store Google Service Account
+      command: echo $GCLOUD_SERVICE_KEY | base64 -di > ${HOME}/gcloud-service-key.json
+    - run:
+      name: Authorize gcloud and set config defaults
+      command: |
+        sudo gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+        sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+
 jobs:
   build_and_setup:
     docker:
@@ -19,14 +30,6 @@ jobs:
             ./gradlew :app:assembleDebug
             ./gradlew :app:assembleDebugAndroidTest
             cd ..
-      - run:
-          name: Store Google Service Account
-          command: echo $GCLOUD_SERVICE_KEY | base64 -di > ${HOME}/gcloud-service-key.json
-      - run:
-          name: Authorize gcloud and set config defaults
-          command: |
-            sudo gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
-            sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
       - persist_to_workspace:
           root: .
           paths:
@@ -38,6 +41,7 @@ jobs:
     steps:
       - attach_workspace:
           at: project
+      - <<: *setup_ftl
       - run:
           name: Test BasicSample with Firebase Test Lab
           command: >
@@ -52,11 +56,12 @@ jobs:
     steps:
       - attach_workspace:
           at: project
+      - <<: *setup_ftl
       - run:
           name: Test 2-way sample with Firebase Test Lab
           command: >
-            sudo gcloud firebase test android run \ 
-              --app TwoWaySample/app/build/outputs/apk/debug/app-debug.apk \ 
+            sudo gcloud firebase test android run \
+              --app TwoWaySample/app/build/outputs/apk/debug/app-debug.apk \
               --test TwoWaySample/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk \
               --results-bucket cloud-test-${GOOGLE_PROJECT_ID}-databindingtwoway
   upload_results:
@@ -78,13 +83,12 @@ workflows:
     jobs:
       - build_and_setup
       - test1:
-          requires: 
+          requires:
             - build_and_setup
       - test2:
-          requires: 
+          requires:
             - build_and_setup
       - upload_results:
           requires:
             - test1
             - test2
-
