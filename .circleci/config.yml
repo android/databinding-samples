@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  test:
+  build_and_setup:
     docker:
       - image: circleci/android:api-28-alpha  # gcloud is baked into this image
     environment:
@@ -25,6 +25,8 @@ jobs:
           command: |
             sudo gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
             sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+  test1:
+    steps:
       - run:
           name: Test BasicSample with Firebase Test Lab
           command: >
@@ -32,6 +34,8 @@ jobs:
               --app BasicSample/app/build/outputs/apk/debug/app-debug.apk \
               --test BasicSample/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk \
               --results-bucket cloud-test-${GOOGLE_PROJECT_ID}-databindingbasic
+  test2:
+    steps:
       - run:
           name: Test 2-way sample with Firebase Test Lab
           command: >
@@ -39,6 +43,8 @@ jobs:
               --app TwoWaySample/app/build/outputs/apk/debug/app-debug.apk \ 
               --test TwoWaySample/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk \
               --results-bucket cloud-test-${GOOGLE_PROJECT_ID}-databindingtwoway
+  upload_results:
+    steps:
       - run:
           name: Install gsutil dependency and copy test results data
           command: |
@@ -49,4 +55,15 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - test
+      - build_and_setup
+      - test1:
+          requires:
+            - build_and_setup
+      - test2:
+          requires:
+            - build_and_setup
+      - upload_results:
+          requires:
+            - test1
+            - test2
+
