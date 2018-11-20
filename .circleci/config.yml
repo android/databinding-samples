@@ -1,9 +1,12 @@
 version: 2
 
-setup_ftl: &setup_ftl
+setup_ftl1: &setup_ftl1
   - run:
     name: Store Google Service Account
     command: echo $GCLOUD_SERVICE_KEY | base64 -di > ${HOME}/gcloud-service-key.json
+
+
+setup_ftl2: &setup_ftl2
   - run:
     name: Authorize gcloud and set config defaults
     command: |
@@ -40,7 +43,8 @@ jobs:
     steps:
       - attach_workspace:
           at: project
-      - <<: *setup_ftl
+      - <<: *setup_ftl1
+      - <<: *setup_ftl2
       - run:
           name: Test BasicSample with Firebase Test Lab
           command: >
@@ -55,7 +59,8 @@ jobs:
     steps:
       - attach_workspace:
           at: project
-      - <<: *setup_ftl
+      - <<: *setup_ftl1
+      - <<: *setup_ftl2
       - run:
           name: Test 2-way sample with Firebase Test Lab
           command: >
