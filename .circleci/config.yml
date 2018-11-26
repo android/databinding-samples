@@ -45,7 +45,8 @@ jobs:
             sudo gcloud firebase test android run \
               --app BasicSample/app/build/outputs/apk/debug/app-debug.apk \
               --test BasicSample/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk \
-              --results-bucket cloud-test-${GOOGLE_PROJECT_ID}-databindingbasic/build_${CIRCLE_BUILD_NUM}
+              --results-bucket cloud-test-${GOOGLE_PROJECT_ID}-databindingbasic
+              --results-dir=build_${CIRCLE_BUILD_NUM}
   test_twoway_sample:
     docker:
       - image: circleci/android:api-28-alpha  # gcloud is baked into this image
@@ -61,7 +62,8 @@ jobs:
             sudo gcloud firebase test android run \
               --app TwoWaySample/app/build/outputs/apk/debug/app-debug.apk \
               --test TwoWaySample/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk \
-              --results-bucket cloud-test-${GOOGLE_PROJECT_ID}-databindingtwoway/build_${CIRCLE_BUILD_NUM}
+              --results-bucket cloud-test-${GOOGLE_PROJECT_ID}-databindingtwoway
+              --results-dir=build_${CIRCLE_BUILD_NUM}
   upload_results:
     docker:
       - image: circleci/android:api-28-alpha  # gcloud is baked into this image
