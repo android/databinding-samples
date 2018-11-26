@@ -15,7 +15,7 @@ jobs:
     working_directory: ~/project
     environment:
       JVM_OPTS: -Xmx3200m
-      RESULTS_DIR=build_${BUILD_ID}
+      RESULTS_DIR:build_${BUILD_ID}
     steps:
       - checkout
       - run:
@@ -37,7 +37,7 @@ jobs:
       - image: circleci/android:api-28-alpha  # gcloud is baked into this image
     working_directory: ~/project
     environment:
-      RESULTS_DIR=build_${BUILD_ID}
+      RESULTS_DIR:build_${BUILD_ID}
     steps:
       - attach_workspace:
           at: .
@@ -54,7 +54,7 @@ jobs:
       - image: circleci/android:api-28-alpha  # gcloud is baked into this image
     working_directory: ~/project
     environment:
-      RESULTS_DIR=build_${BUILD_ID}
+      RESULTS_DIR:build_${BUILD_ID}
     steps:
       - attach_workspace:
           at: .
@@ -71,7 +71,7 @@ jobs:
       - image: circleci/android:api-28-alpha  # gcloud is baked into this image
     working_directory: ~/project
     environment:
-      RESULTS_DIR=build_${BUILD_ID}
+      RESULTS_DIR:build_${BUILD_ID}
     steps:
       - attach_workspace:
           at: .
