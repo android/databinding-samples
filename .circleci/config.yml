@@ -35,6 +35,8 @@ jobs:
     docker:
       - image: circleci/android:api-28-alpha  # gcloud is baked into this image
     working_directory: ~/project
+    environment:
+      RESULTS_DIR=build_${CIRCLE_BUILD_NUM}
     steps:
       - attach_workspace:
           at: .
@@ -48,10 +50,21 @@ jobs:
               --test BasicSample/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk \
               --results-bucket cloud-test-${GOOGLE_PROJECT_ID}-databindingbasic \
               --results-dir=${RESULTS_DIR}
+      - run:
+         name: Download results
+         command: |
+            sudo pip install -U crcmod
+            mkdir firebase_test_results
+            sudo gsutil -m cp -r -U `sudo gsutil ls gs://cloud-test-${GOOGLE_PROJECT_ID}-databindingtwoway/${RESULTS_DIR} | tail -1` firebase_test_results/ | true
+      - store_artifacts:
+          path: firebase_test_results
+          
   test_twoway_sample:
     docker:
       - image: circleci/android:api-28-alpha  # gcloud is baked into this image
     working_directory: ~/project
+    environment:
+      RESULTS_DIR=build_${CIRCLE_BUILD_NUM}
     steps:
       - attach_workspace:
           at: .
@@ -59,29 +72,20 @@ jobs:
       - run:
           name: Test 2-way sample with Firebase Test Lab
           command: |
-            RESULTS_DIR=build_${CIRCLE_BUILD_NUM}
             sudo gcloud firebase test android run \
               --app TwoWaySample/app/build/outputs/apk/debug/app-debug.apk \
               --test TwoWaySample/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk \
               --results-bucket cloud-test-${GOOGLE_PROJECT_ID}-databindingtwoway \
               --results-dir=${RESULTS_DIR}
-  upload_results:
-    docker:
-      - image: circleci/android:api-28-alpha  # gcloud is baked into this image
-    working_directory: ~/project
-    steps:
-      - attach_workspace:
-          at: .
-      - <<: *setup_ftl
       - run:
-          name: Install gsutil dependency and copy test results data
-          command: |
-            RESULTS_DIR=build_${CIRCLE_BUILD_NUM}
+         name: Download results
+         command: |
             sudo pip install -U crcmod
-            sudo gsutil -m cp -r -U `sudo gsutil ls gs://cloud-test-${GOOGLE_PROJECT_ID}-databindingbasic/${RESULTS_DIR} | tail -1` ${CIRCLE_ARTIFACTS}/ | true
-            sudo gsutil -m cp -r -U `sudo gsutil ls gs://cloud-test-${GOOGLE_PROJECT_ID}-databindingtwoway/${RESULTS_DIR} | tail -1` ${CIRCLE_ARTIFACTS}/ | true
+            mkdir firebase_test_results
+            sudo gsutil -m cp -r -U `sudo gsutil ls gs://cloud-test-${GOOGLE_PROJECT_ID}-databindingtwoway/${RESULTS_DIR} | tail -1` firebase_test_results/ | true
       - store_artifacts:
           path: firebase_test_results
+
 
 workflows:
   version: 2
@@ -94,7 +98,3 @@ workflows:
       - test_twoway_sample:
           requires:
             - build_and_setup
-      - upload_results:
-          requires:
-            - test_basic_sample
-            - test_twoway_sample
