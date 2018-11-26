@@ -1,6 +1,6 @@
 version: 2
 
-setup_ftl2: &setup_ftl
+setup_ftl: &setup_ftl
   - run:
       name: Authorize gcloud and set config defaults
       command: |
@@ -50,9 +50,10 @@ jobs:
       - run:
          name: Download results
          command: |
+            BUILD_DIR=build_${CIRCLE_BUILD_NUM}
             sudo pip install -U crcmod
             mkdir firebase_test_results
-            sudo gsutil -m cp -r -U `sudo gsutil ls gs://cloud-test-${GOOGLE_PROJECT_ID}-databindingbasic/build_${CIRCLE_BUILD_NUM} | tail -1` firebase_test_results/ | true
+            sudo gsutil -m mv -r -U `sudo gsutil ls gs://cloud-test-${GOOGLE_PROJECT_ID}-databindingbasic/${BUILD_DIR} | tail -1` firebase_test_results/ | true
       - store_artifacts:
           path: firebase_test_results
           
@@ -75,9 +76,10 @@ jobs:
       - run:
          name: Download results
          command: |
+            BUILD_DIR=build_${CIRCLE_BUILD_NUM}
             sudo pip install -U crcmod
             mkdir firebase_test_results
-            sudo gsutil -m cp -r -U `sudo gsutil ls gs://cloud-test-${GOOGLE_PROJECT_ID}-databindingtwoway/build_${CIRCLE_BUILD_NUM} | tail -1` firebase_test_results/ | true
+            sudo gsutil -m mv -r -U `sudo gsutil ls gs://cloud-test-${GOOGLE_PROJECT_ID}-databindingtwoway/${BUILD_DIR} | tail -1` firebase_test_results/ | true
       - store_artifacts:
           path: firebase_test_results
 
