@@ -55,7 +55,7 @@ jobs:
          command: |
             sudo pip install -U crcmod
             mkdir firebase_test_results
-            sudo gsutil -m cp -r -U `sudo gsutil ls gs://cloud-test-${GOOGLE_PROJECT_ID}-databindingtwoway/${RESULTS_DIR} | tail -1` firebase_test_results/ | true
+            sudo gsutil -m cp -r -U `sudo gsutil ls gs://cloud-test-${GOOGLE_PROJECT_ID}-databindingbasic/${RESULTS_DIR} | tail -1` firebase_test_results/ | true
       - store_artifacts:
           path: firebase_test_results
           
