@@ -42,7 +42,7 @@ jobs:
       - run:
           name: Test BasicSample with Firebase Test Lab
           command: |
-            RESULTS_DIR=build_${$CIRCLE_BUILD_NUM }
+            RESULTS_DIR=build_${$CIRCLE_BUILD_NUM}
             sudo gcloud firebase test android run \
               --app BasicSample/app/build/outputs/apk/debug/app-debug.apk \
               --test BasicSample/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk \
@@ -58,7 +58,7 @@ jobs:
       - run:
           name: Test 2-way sample with Firebase Test Lab
           command: |
-            RESULTS_DIR=build_${$CIRCLE_BUILD_NUM }
+            RESULTS_DIR=build_${$CIRCLE_BUILD_NUM}
             sudo gcloud firebase test android run \
               --app TwoWaySample/app/build/outputs/apk/debug/app-debug.apk \
               --test TwoWaySample/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk \
@@ -74,7 +74,7 @@ jobs:
       - run:
           name: Install gsutil dependency and copy test results data
           command: |
-            RESULTS_DIR=build_${$CIRCLE_BUILD_NUM }
+            RESULTS_DIR=build_${$CIRCLE_BUILD_NUM}
             sudo pip install -U crcmod
             sudo gsutil -m cp -r -U `sudo gsutil ls gs://cloud-test-${GOOGLE_PROJECT_ID}-databindingbasic/${RESULTS_DIR} | tail -1` ${CIRCLE_ARTIFACTS}/ | true
             sudo gsutil -m cp -r -U `sudo gsutil ls gs://cloud-test-${GOOGLE_PROJECT_ID}-databindingtwoway/${RESULTS_DIR} | tail -1` ${CIRCLE_ARTIFACTS}/ | true
