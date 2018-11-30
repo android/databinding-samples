@@ -36,20 +36,17 @@ jobs:
             mkdir -p ~/junit/
             find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/junit/ \;
           when: always          
-      - run:
-          name: Save lint results
-          command: |
-            mkdir -p ~/lint/
-            find . -type f -regex ".*/build/reports/.*xml" -exec cp {} ~/lint/ \;
-          when: always
       - store_test_results:
           path: ~/junit
       - store_artifacts:
           path: ~/junit
           destination: tests
       - store_artifacts:
-          path: ~/lint
-          destination: reports
+          path: ~/BasicSample/app/build/reports
+          destination: lint/BasicSample
+      - store_artifacts:
+          path: ~/TwoWaySample/app/build/reports
+          destination: lint/TwoWaySample
       - persist_to_workspace:
           root: .
           paths:
