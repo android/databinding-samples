@@ -43,10 +43,10 @@ jobs:
           destination: tests
       - store_artifacts:
           path: ./BasicSample/app/build/reports
-          destination: lint/BasicSample
+          destination: reports/BasicSample
       - store_artifacts:
           path: ./TwoWaySample/app/build/reports
-          destination: lint/TwoWaySample
+          destination: reports/TwoWaySample
       - persist_to_workspace:
           root: .
           paths:
