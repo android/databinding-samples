@@ -1,5 +1,14 @@
 version: 2
 
+config_android: &config_android
+  docker:
+    - image: circleci/android:api-28-alpha
+  working_directory: ~/project
+  environment:
+    JAVA_TOOL_OPTIONS: "-Xmx1024m"
+    GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2 -Dkotlin.incremental=false"
+    TERM: dumb
+
 setup_ftl: &setup_ftl
   - run:
       name: Authorize gcloud and set config defaults
@@ -10,31 +19,23 @@ setup_ftl: &setup_ftl
 
 jobs:
   build_and_setup:
-    docker:
-      - image: circleci/android:api-28-alpha  # gcloud is baked into this image
-    working_directory: ~/project
-    environment:
-      JVM_OPTS: -Xmx3200m
+    <<: *config_android
     steps:
       - checkout
       - run:
           name: Build debug APK and release APK
           command: |
             cd BasicSample
-            ./gradlew :app:assembleDebug
-            ./gradlew :app:assembleDebugAndroidTest
+            ./gradlew :app:assembleDebug :app:assembleDebugAndroidTest
             cd ../TwoWaySample
-            ./gradlew :app:assembleDebug
-            ./gradlew :app:assembleDebugAndroidTest
+            ./gradlew :app:assembleDebug :app:assembleDebugAndroidTest
             cd ..
       - persist_to_workspace:
           root: .
           paths:
             - ./*/app/build
   test_basic_sample:
-    docker:
-      - image: circleci/android:api-28-alpha  # gcloud is baked into this image
-    working_directory: ~/project
+    <<: *config_android
     steps:
       - attach_workspace:
           at: .
@@ -58,9 +59,7 @@ jobs:
           path: firebase_test_results
           
   test_twoway_sample:
-    docker:
-      - image: circleci/android:api-28-alpha  # gcloud is baked into this image
-    working_directory: ~/project
+    <<: *config_android
     steps:
       - attach_workspace:
           at: .
