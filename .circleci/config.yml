@@ -42,10 +42,10 @@ jobs:
           path: ~/junit
           destination: tests
       - store_artifacts:
-          path: ~/BasicSample/app/build/reports
+          path: ./BasicSample/app/build/reports
           destination: lint/BasicSample
       - store_artifacts:
-          path: ~/TwoWaySample/app/build/reports
+          path: ./TwoWaySample/app/build/reports
           destination: lint/TwoWaySample
       - persist_to_workspace:
           root: .
