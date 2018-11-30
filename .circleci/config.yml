@@ -16,6 +16,18 @@ setup_ftl: &setup_ftl
         echo $GCLOUD_SERVICE_KEY | base64 -di > ${HOME}/gcloud-service-key.json
         sudo gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
         sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+        
+save_unit_test_results: &save_unit_test_results
+  - run:
+      name: Save test results
+      command: |
+        mkdir -p ~/junit/
+        find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/junit/ \;
+      when: always
+  - store_test_results:
+      path: ~/junit
+  - store_artifacts:
+      path: ~/junit     
 
 jobs:
   build_and_setup:
@@ -26,10 +38,12 @@ jobs:
           name: Build debug APK and release APK
           command: |
             cd BasicSample
-            ./gradlew :app:assembleDebug :app:assembleDebugAndroidTest
+            ./gradlew :app:assembleDebug :app:assembleDebugAndroidTest :app:test
             cd ../TwoWaySample
-            ./gradlew :app:assembleDebug :app:assembleDebugAndroidTest
+            ./gradlew :app:assembleDebug :app:assembleDebugAndroidTest :app:test
             cd ..
+
+      - <<: *save_unit_test_results
       - persist_to_workspace:
           root: .
           paths:
