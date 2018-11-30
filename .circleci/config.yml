@@ -18,7 +18,7 @@ setup_ftl: &setup_ftl
         sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
         
 jobs:
-  build_and_setup:
+  build_test_lint:
     <<: *config_android
     steps:
       - checkout
@@ -51,7 +51,7 @@ jobs:
           root: .
           paths:
             - ./*/app/build
-  test_basic_sample:
+  ftl_basic_sample:
     <<: *config_android
     steps:
       - attach_workspace:
@@ -75,7 +75,7 @@ jobs:
       - store_artifacts:
           path: firebase_test_results
           
-  test_twoway_sample:
+  ftl_twoway_sample:
     <<: *config_android
     steps:
       - attach_workspace:
@@ -104,10 +104,10 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - build_and_setup
-      - test_basic_sample:
+      - build_test_lint
+      - ftl_basic_sample:
           requires:
-            - build_and_setup
-      - test_twoway_sample:
+            - build_test_lint
+      - ftl_twoway_sample:
           requires:
-            - build_and_setup
+            - build_test_lint
