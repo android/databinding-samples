@@ -26,15 +26,20 @@ jobs:
           name: Build debug APK and release APK
           command: |
             cd BasicSample
-            ./gradlew :app:assembleDebug :app:assembleDebugAndroidTest :app:test
+            ./gradlew :app:assembleDebug :app:assembleDebugAndroidTest :app:test :app:lint
             cd ../TwoWaySample
-            ./gradlew :app:assembleDebug :app:assembleDebugAndroidTest :app:test
+            ./gradlew :app:assembleDebug :app:assembleDebugAndroidTest :app:test :app:lint
             cd ..
       - run:
           name: Save test results
           command: |
             mkdir -p ~/junit/
             find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/junit/ \;
+          when: always
+      - run:
+          name: Save lint results
+          command: |
+            find . -type f -regex ".*/build/reports/.*xml" -exec cp {} ~/junit/ \;
           when: always
       - store_test_results:
           path: ~/junit
