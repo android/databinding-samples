@@ -2,7 +2,7 @@ version: 2
 
 config_android: &config_android
   docker:
-    - image: circleci/android:api-28-alpha
+    - image: circleci/android:api-28
   working_directory: ~/project
   environment:
     JAVA_TOOL_OPTIONS: "-Xmx1024m"
