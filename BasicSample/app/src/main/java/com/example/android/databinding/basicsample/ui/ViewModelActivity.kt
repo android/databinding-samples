@@ -16,10 +16,10 @@
 
 package com.example.android.databinding.basicsample.ui
 
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.example.android.databinding.basicsample.R
 import com.example.android.databinding.basicsample.data.ProfileObservableViewModel
 import com.example.android.databinding.basicsample.databinding.ViewmodelProfileBinding

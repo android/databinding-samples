@@ -16,7 +16,7 @@
 
 package com.example.android.databinding.basicsample.data
 
-import android.databinding.ObservableInt
+import androidx.databinding.ObservableInt
 
 /**
  * Used as a layout variable to provide static properties (name and lastName) and an observable

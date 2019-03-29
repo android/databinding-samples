@@ -27,7 +27,7 @@
             type="com.example.android.databinding.basicsample.data.ProfileObservableViewModel"/>
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -162,5 +162,5 @@
             app:layout_constraintStart_toStartOf="@+id/like_button"
             app:layout_constraintTop_toBottomOf="@+id/like_button"
             tools:progressBackgroundTint="@android:color/darker_gray"/>
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

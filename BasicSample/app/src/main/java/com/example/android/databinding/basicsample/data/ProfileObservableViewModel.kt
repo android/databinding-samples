@@ -16,10 +16,10 @@
 
 package com.example.android.databinding.basicsample.data
 
-import android.arch.lifecycle.ViewModel
-import android.databinding.Bindable
-import android.databinding.ObservableField
-import android.databinding.ObservableInt
+import androidx.lifecycle.ViewModel
+import androidx.databinding.Bindable
+import androidx.databinding.ObservableField
+import androidx.databinding.ObservableInt
 import com.example.android.databinding.basicsample.BR
 import com.example.android.databinding.basicsample.util.ObservableViewModel
 

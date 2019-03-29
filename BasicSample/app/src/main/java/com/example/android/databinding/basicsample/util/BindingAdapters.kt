@@ -18,11 +18,11 @@ package com.example.android.databinding.basicsample.util
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.databinding.BindingAdapter
+import androidx.databinding.BindingAdapter
 import android.graphics.drawable.Drawable
 import android.os.Build
-import android.support.v4.content.ContextCompat
-import android.support.v4.widget.ImageViewCompat
+import androidx.core.content.ContextCompat
+import androidx.core.widget.ImageViewCompat
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar

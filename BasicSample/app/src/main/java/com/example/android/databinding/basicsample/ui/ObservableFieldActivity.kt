@@ -16,10 +16,10 @@
 
 package com.example.android.databinding.basicsample.ui
 
-import android.databinding.DataBindingUtil
-import android.databinding.ObservableInt
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ObservableInt
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import com.example.android.databinding.basicsample.R
 import com.example.android.databinding.basicsample.data.ObservableFieldProfile
