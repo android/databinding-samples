@@ -16,8 +16,6 @@
 
 package com.example.android.databinding.twowaysample
 
-import android.app.Application
-import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.pressImeActionButton
@@ -43,7 +41,7 @@ import org.junit.runner.RunWith
 class BasicUsageTest {
 
     @get:Rule
-    var mActivityRule = ActivityTestRule(MainActivity::class.java)
+    var activityRule = ActivityTestRule(MainActivity::class.java)
 
     @Test
     fun work_increments() {
@@ -80,7 +78,7 @@ class BasicUsageTest {
         onView(withId(R.id.setsIncrease)).perform(click())
 
         // Check that it was incremented and formatted correctly
-        val setsFormat = getApplicationContext<Application>().resources.getString(
+        val setsFormat = activityRule.activity.resources.getString(
                 R.string.sets_format)
         onView(withId(R.id.numberOfSets))
                 .check(matches(withText(String.format(setsFormat, 1, initialSets + 1))))
