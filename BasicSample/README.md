@@ -5,7 +5,7 @@ This sample showcases the following features of the
 [Data Binding library](https://developer.android.com/topic/libraries/data-binding/index.html):
 
 * Layout variables and expressions
-* Observability through Observable Fields and Observable classes
+* Observability through Observable Fields, LiveData and Observable classes
 * Binding Adapters, Binding Methods and Binding Converters
 * Seamless integration with ViewModels
 
@@ -42,9 +42,9 @@ for a simple example.
 
 ### Observability
 
-In order to update the UI automatically when the data changes, Data Binding lets you bind attributes with
-observable objects. You can choose between two mechanisms to achieve this: Observable fields and
-Observable classes.
+In order to update the UI automatically when the data changes, Data Binding lets you bind attributes
+wit observable objects. You can choose between three mechanisms to achieve this: Observable fields,
+LiveData and Observable classes.
 
 #### Observable fields
 
@@ -65,6 +65,22 @@ class ProfileObservableFieldsViewModel : ViewModel() {
 
 In this example, when `onLike` is called, the number of likes is incremented
 and the UI is updated. There is no need to notify that the property changed.
+
+#### LiveData
+
+LiveData is an observable from
+[Android Architecture Components](https://developer.android.com/topic/libraries/architecture)
+that is lifecycle-aware. It requires an extra step done on the binding:
+
+
+```kotlin
+
+binding.lifecycleOwner = this  // use viewLifecycleOwner when assigning a fragment
+```
+
+The advantages over Observable Fields are that LiveData supports
+[Transformations](https://developer.android.com/reference/android/arch/lifecycle/Transformations)
+and it's compatible with other components and libraries, like Room and WorkManager.
 
 #### Observable classes
 

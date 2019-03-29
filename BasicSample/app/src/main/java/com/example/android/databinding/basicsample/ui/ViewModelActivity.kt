@@ -16,12 +16,12 @@
 
 package com.example.android.databinding.basicsample.ui
 
-import androidx.lifecycle.ViewModelProviders
-import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import com.example.android.databinding.basicsample.R
-import com.example.android.databinding.basicsample.data.ProfileObservableViewModel
+import com.example.android.databinding.basicsample.data.ProfileLiveDataViewModel
 import com.example.android.databinding.basicsample.databinding.ViewmodelProfileBinding
 
 /**
@@ -36,7 +36,10 @@ class ViewModelActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         // Obtain ViewModel from ViewModelProviders
-        val viewModel = ViewModelProviders.of(this).get(ProfileObservableViewModel::class.java)
+        val viewModel = ViewModelProviders.of(this).get(ProfileLiveDataViewModel::class.java)
+
+        // An alternative ViewModel using Observable fields and @Bindable properties can be used:
+        // val viewModel = ViewModelProviders.of(this).get(ProfileObservableViewModel::class.java)
 
         // Obtain binding
         val binding: ViewmodelProfileBinding =
@@ -44,5 +47,8 @@ class ViewModelActivity : AppCompatActivity() {
 
         // Bind layout with ViewModel
         binding.viewmodel = viewModel
+
+        // LiveData needs the lifecycle owner
+        binding.lifecycleOwner = this
     }
 }
