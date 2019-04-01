@@ -43,7 +43,7 @@ for a simple example.
 ### Observability
 
 In order to update the UI automatically when the data changes, Data Binding lets you bind attributes
-wit observable objects. You can choose between three mechanisms to achieve this: Observable fields,
+with observable objects. You can choose between three mechanisms to achieve this: Observable fields,
 LiveData and Observable classes.
 
 #### Observable fields
@@ -55,7 +55,7 @@ fields will update the layout automatically.
 ```kotlin
 class ProfileObservableFieldsViewModel : ViewModel() {
 
-    val likes =  ObservableInt(0)
+    val likes = ObservableInt(0)
 
     fun onLike() {
         likes.increment()  // Equivalent to set(likes.get() + 1)
@@ -70,17 +70,30 @@ and the UI is updated. There is no need to notify that the property changed.
 
 LiveData is an observable from
 [Android Architecture Components](https://developer.android.com/topic/libraries/architecture)
-that is lifecycle-aware. It requires an extra step done on the binding:
+that is lifecycle-aware. 
+
+The advantages over Observable Fields are that LiveData supports
+[Transformations](https://developer.android.com/reference/android/arch/lifecycle/Transformations)
+and it's compatible with other components and libraries, like Room and WorkManager.
+
+```kotlin
+class ProfileLiveDataViewModel : ViewModel() {
+    private val _likes =  MutableLiveData(0)
+    val likes: LiveData<Int> = _likes // Expose an immutable LiveData
+
+    fun onLike() {
+        _likes.value = (_likes.value ?: 0) + 1
+    }
+}
+```
+
+It requires an extra step done on the binding:
 
 
 ```kotlin
 
 binding.lifecycleOwner = this  // use viewLifecycleOwner when assigning a fragment
 ```
-
-The advantages over Observable Fields are that LiveData supports
-[Transformations](https://developer.android.com/reference/android/arch/lifecycle/Transformations)
-and it's compatible with other components and libraries, like Room and WorkManager.
 
 #### Observable classes
 
