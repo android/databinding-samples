@@ -16,16 +16,15 @@
 
 package com.example.android.databinding.twowaysample
 
-import android.support.test.InstrumentationRegistry
-import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.action.ViewActions.click
-import android.support.test.espresso.action.ViewActions.pressImeActionButton
-import android.support.test.espresso.action.ViewActions.typeText
-import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.matcher.ViewMatchers.withId
-import android.support.test.espresso.matcher.ViewMatchers.withText
-import android.support.test.rule.ActivityTestRule
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.pressImeActionButton
+import androidx.test.espresso.action.ViewActions.typeText
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.rule.ActivityTestRule
 import com.example.android.databinding.twowaysample.ui.MainActivity
 import org.junit.Rule
 import org.junit.Test
@@ -42,7 +41,7 @@ import org.junit.runner.RunWith
 class BasicUsageTest {
 
     @get:Rule
-    var mActivityRule = ActivityTestRule(MainActivity::class.java)
+    var activityRule = ActivityTestRule(MainActivity::class.java)
 
     @Test
     fun work_increments() {
@@ -79,7 +78,7 @@ class BasicUsageTest {
         onView(withId(R.id.setsIncrease)).perform(click())
 
         // Check that it was incremented and formatted correctly
-        val setsFormat = InstrumentationRegistry.getTargetContext().resources.getString(
+        val setsFormat = activityRule.activity.resources.getString(
                 R.string.sets_format)
         onView(withId(R.id.numberOfSets))
                 .check(matches(withText(String.format(setsFormat, 1, initialSets + 1))))

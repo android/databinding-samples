@@ -16,19 +16,49 @@
 
 package com.example.android.databinding.basicsample.data
 
-import android.arch.lifecycle.ViewModel
-import android.databinding.Bindable
-import android.databinding.ObservableField
-import android.databinding.ObservableInt
+import androidx.databinding.Bindable
+import androidx.databinding.ObservableField
+import androidx.databinding.ObservableInt
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.ViewModel
 import com.example.android.databinding.basicsample.BR
 import com.example.android.databinding.basicsample.util.ObservableViewModel
 
+
 /**
  * This class is used as a variable in the XML layout and it's fully observable, meaning that
- * changes to any of the public fields automatically refresh the UI.
+ * changes to any of the exposed observables automatically refresh the UI. *
+ */
+class ProfileLiveDataViewModel : ViewModel() {
+    private val _name = MutableLiveData("Ada")
+    private val _lastName = MutableLiveData("Lovelace")
+    private val _likes =  MutableLiveData(0)
+
+    val name: LiveData<String> = _name
+    val lastName: LiveData<String> = _lastName
+    val likes: LiveData<Int> = _likes
+
+    // popularity is exposed as LiveData using a Transformation instead of a @Bindable property.
+    val popularity: LiveData<Popularity> = Transformations.map(_likes) {
+        when {
+            it > 9 -> Popularity.STAR
+            it > 4 -> Popularity.POPULAR
+            else -> Popularity.NORMAL
+        }
+    }
+
+    fun onLike() {
+        _likes.value = (_likes.value ?: 0) + 1
+    }
+}
+
+/**
+ * As an alternative to LiveData, you can use Observable Fields and binding properties.
  *
- * `Popularity` is exposed here as a `@Bindable` attribute, see the
- * [ProfileObservableFieldsViewModel] for an alternative using Observable fields.
+ * `Popularity` is exposed here as a `@Bindable` property so it's necessary to call
+ * `notifyPropertyChanged` when any of the dependent properties change (`likes` in this case).
  */
 class ProfileObservableViewModel : ObservableViewModel() {
     val name = ObservableField("Ada")
@@ -50,30 +80,6 @@ class ProfileObservableViewModel : ObservableViewModel() {
                 else -> Popularity.NORMAL
             }
         }
-    }
-}
-
-/**
- * As an alternative, the @Bindable attribute can be replaced with an
- * `ObservableField`. In this case 'popularity' is an `ObservableField` which has to be computed when
- * `likes` change.
- */
-class ProfileObservableFieldsViewModel : ViewModel() {
-    val name = ObservableField("Ada")
-    val lastName = ObservableField("Lovelace")
-    val likes =  ObservableInt(0)
-
-    // popularity is exposed as an ObservableField instead of a @Bindable property.
-    val popularity = ObservableField<Popularity>(Popularity.NORMAL)
-
-    fun onLike() {
-        likes.set(likes.get() + 1)
-
-        popularity.set(likes.get().let {
-            if (it > 9) Popularity.STAR
-            if (it > 4) Popularity.POPULAR
-            Popularity.NORMAL
-        })
     }
 }
 

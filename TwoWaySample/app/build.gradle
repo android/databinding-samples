@@ -30,7 +30,7 @@ android {
         targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
@@ -46,20 +46,18 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
-    implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
-    implementation "com.android.support:support-v4:$supportLibraryVersion"
-    implementation "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+    implementation "androidx.appcompat:appcompat:$appCompatVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
 
-    implementation "android.arch.lifecycle:extensions:$archLifecycleVersion"
-
-    //noinspection GradleDependency
-    kapt "com.android.databinding:compiler:$dataBindingCompilerVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$archLifecycleVersion"
 
     testImplementation "junit:junit:$junitVersion"
     testImplementation "org.hamcrest:hamcrest-all:$hamcrestVersion"
 
-    androidTestImplementation "com.android.support.test:runner:$runnerVersion"
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "androidx.test:runner:$androidXTestVersion"
+    androidTestImplementation "androidx.test.ext:junit:$runnerExtVersion"
+    androidTestImplementation "androidx.test:rules:$androidXTestVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
 
 }

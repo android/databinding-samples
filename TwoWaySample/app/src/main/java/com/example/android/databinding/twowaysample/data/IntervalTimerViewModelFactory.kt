@@ -16,8 +16,8 @@
 
 package com.example.android.databinding.twowaysample.data
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.example.android.databinding.twowaysample.util.DefaultTimer
 
 
