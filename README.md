@@ -8,9 +8,10 @@ A collection of samples using the [Android Data Binding Library](https://develop
 * **[BasicSample](https://github.com/googlesamples/android-databinding/blob/master/BasicSample)** - (Kotlin) Shows basic usage of layout expressions, binding adapters, and integration with ViewModels.
 * **[TwoWaySample](https://github.com/googlesamples/android-databinding/blob/master/TwoWaySample)** - (Kotlin) Shows usage of two-way data binding, advanced Binding Adapters, animations, converters and inverse converters.
 
-### Other samples
+### Other official samples using Data Binding
 
-* **[Android Architecture Blueprints (todo-mvvm-databinding branch)](https://github.com/googlesamples/android-architecture/tree/todo-mvvm-databinding/)** - Shows basic Data Binding usage with the Model‑View‑ViewModel pattern.
+* **[Android Architecture Blueprints (todo-mvvm-live-kotlin branch)](https://github.com/googlesamples/android-architecture/tree/todo-mvvm-live-kotlin/)** - Shows basic Data Binding usage with architecture best practices and Architecture Components, in Kotlin.
+* **[Android Architecture Components Samples](https://github.com/googlesamples/android-architecture-components/tree/master/GithubBrowserSample)** - An advanced sample that uses the Architecture components, Dagger and the Github API, in Kotlin.
 * **[Android Sunflower](https://github.com/googlesamples/android-sunflower)** - A gardening app illustrating Android development best practices with Android Jetpack, including Data Binding.
 
 ### Reporting Issues
