@@ -38,6 +38,6 @@ import android.widget.ImageView
  */
 @BindingMethods(
         BindingMethod(type = ImageView::class,
-                attribute = "app:srcCompat",
+                attribute = "srcCompat",
                 method = "setImageResource"))
 class MyBindingMethods
