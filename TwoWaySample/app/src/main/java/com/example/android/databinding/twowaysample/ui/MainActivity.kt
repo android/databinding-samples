@@ -25,12 +25,11 @@ import androidx.databinding.ObservableInt
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
-import com.example.android.databinding.twowaysample.BR
+import androidx.databinding.library.baseAdapters.BR
 import com.example.android.databinding.twowaysample.R
 import com.example.android.databinding.twowaysample.data.IntervalTimerViewModel
 import com.example.android.databinding.twowaysample.data.IntervalTimerViewModelFactory
 import com.example.android.databinding.twowaysample.databinding.IntervalTimerBinding
-
 
 const val SHARED_PREFS_KEY = "timer"
 
@@ -114,6 +113,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun observeAndSaveNumberOfSets(viewModel: IntervalTimerViewModel) {
         viewModel.addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback() {
+
             @SuppressLint("CommitPrefEdits")
             override fun onPropertyChanged(observable: Observable?, p1: Int) {
                 if (p1 == BR.numberOfSets) {
