@@ -17,9 +17,6 @@
 <resources>
     <string name="app_name">BasicSample</string>
     <string name="likes">Likes</string>
-    <string name="textview">TextView</string>
-    <string name="profile_name">NAME</string>
-    <string name="profile_lastname">LAST NAME</string>
     <string name="last_name_label">Last name</string>
     <string name="name_label">Name</string>
     <string name="profile_avatar_cd">Profile\'s avatar</string>
