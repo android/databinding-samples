@@ -25,7 +25,7 @@ status:       PUBLISHED
 # statusNote:
 
 technologies: [Android]
-categories:   [Architecture]
+categories:   [Data Binding]
 languages:    [Kotlin]
 solutions:    [Mobile]
 
