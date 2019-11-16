@@ -16,17 +16,17 @@
 
 package com.example.android.databinding.basicsample.ui
 
-import android.databinding.DataBindingUtil
-import android.databinding.ObservableInt
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ObservableInt
 import com.example.android.databinding.basicsample.R
 import com.example.android.databinding.basicsample.data.ObservableFieldProfile
 import com.example.android.databinding.basicsample.databinding.ObservableFieldProfileBinding
 
 /**
- * This activity shows the same data as [PojoActivity] but it lets the user increment the
+ * This activity shows shows static data and lets the user increment the
  * number of likes by clicking a button. See [ViewModelActivity] for a better implementation.
  */
 class ObservableFieldActivity : AppCompatActivity() {

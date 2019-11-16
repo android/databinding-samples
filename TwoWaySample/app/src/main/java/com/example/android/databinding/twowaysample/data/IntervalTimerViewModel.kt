@@ -17,8 +17,8 @@
 package com.example.android.databinding.twowaysample.data
 
 
-import android.databinding.Bindable
-import android.databinding.ObservableInt
+import androidx.databinding.Bindable
+import androidx.databinding.ObservableInt
 import com.example.android.databinding.twowaysample.BR
 import com.example.android.databinding.twowaysample.util.ObservableViewModel
 import com.example.android.databinding.twowaysample.util.Timer

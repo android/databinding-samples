@@ -1,0 +1,113 @@
+version: 2
+
+config_android: &config_android
+  docker:
+    - image: circleci/android:api-28
+  working_directory: ~/project
+  environment:
+    JAVA_TOOL_OPTIONS: "-Xmx1024m"
+    GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2 -Dkotlin.incremental=false"
+    TERM: dumb
+
+setup_ftl: &setup_ftl
+  - run:
+      name: Authorize gcloud and set config defaults
+      command: |
+        echo $GCLOUD_SERVICE_KEY | base64 -di > ${HOME}/gcloud-service-key.json
+        sudo gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+        sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+        
+jobs:
+  build_test_lint:
+    <<: *config_android
+    steps:
+      - checkout
+      - run:
+          name: Build debug APK and release APK
+          command: |
+            cd BasicSample
+            ./gradlew :app:assembleDebug :app:assembleDebugAndroidTest :app:test :app:lint
+            cd ../TwoWaySample
+            ./gradlew :app:assembleDebug :app:assembleDebugAndroidTest :app:test :app:lint
+            cd ..
+      - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/junit/
+            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/junit/ \;
+          when: always          
+      - store_test_results:
+          path: ~/junit
+      - store_artifacts:
+          path: ~/junit
+          destination: tests
+      - store_artifacts:
+          path: ./BasicSample/app/build/reports
+          destination: reports/BasicSample
+      - store_artifacts:
+          path: ./TwoWaySample/app/build/reports
+          destination: reports/TwoWaySample
+      - persist_to_workspace:
+          root: .
+          paths:
+            - ./*/app/build
+  ftl_basic_sample:
+    <<: *config_android
+    steps:
+      - attach_workspace:
+          at: .
+      - <<: *setup_ftl
+      - run:
+          name: Test BasicSample with Firebase Test Lab
+          command: |
+            sudo gcloud firebase test android run \
+              --app BasicSample/app/build/outputs/apk/debug/app-debug.apk \
+              --test BasicSample/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk \
+              --results-bucket cloud-test-${GOOGLE_PROJECT_ID}-databindingbasic \
+              --results-dir=build_${CIRCLE_BUILD_NUM}
+      - run:
+         name: Download results
+         command: |
+            BUILD_DIR=build_${CIRCLE_BUILD_NUM}
+            sudo pip install -U crcmod
+            mkdir firebase_test_results
+            sudo gsutil -m mv -r -U `sudo gsutil ls gs://cloud-test-${GOOGLE_PROJECT_ID}-databindingbasic/${BUILD_DIR} | tail -1` firebase_test_results/ | true
+      - store_artifacts:
+          path: firebase_test_results
+          
+  ftl_twoway_sample:
+    <<: *config_android
+    steps:
+      - attach_workspace:
+          at: .
+      - <<: *setup_ftl
+      - run:
+          name: Test 2-way sample with Firebase Test Lab
+          command: |
+            sudo gcloud firebase test android run \
+              --app TwoWaySample/app/build/outputs/apk/debug/app-debug.apk \
+              --test TwoWaySample/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk \
+              --results-bucket cloud-test-${GOOGLE_PROJECT_ID}-databindingtwoway \
+              --results-dir=build_${CIRCLE_BUILD_NUM}
+      - run:
+         name: Download results
+         command: |
+            BUILD_DIR=build_${CIRCLE_BUILD_NUM}
+            sudo pip install -U crcmod
+            mkdir firebase_test_results
+            sudo gsutil -m mv -r -U `sudo gsutil ls gs://cloud-test-${GOOGLE_PROJECT_ID}-databindingtwoway/${BUILD_DIR} | tail -1` firebase_test_results/ | true
+      - store_artifacts:
+          path: firebase_test_results
+
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build_test_lint
+      - ftl_basic_sample:
+          requires:
+            - build_test_lint
+      - ftl_twoway_sample:
+          requires:
+            - build_test_lint

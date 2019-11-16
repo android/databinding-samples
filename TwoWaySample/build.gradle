@@ -19,22 +19,23 @@
 buildscript {
     ext {
         // SDK and tools
-        compileSdkVersion = 27
+        compileSdkVersion = 28
         minSdkVersion = 21
-        targetSdkVersion = 27
+        targetSdkVersion = 28
 
         // App dependencies
-        constraintLayoutVersion = '1.0.2'
-        espressoVersion = '3.0.1'
-        gradleVersion = '3.0.1'
+        androidXTestVersion = '1.1.1'
+        constraintLayoutVersion = '1.1.3'
+        espressoVersion = '3.1.0-alpha4'
+        gradleVersion = '3.3.1'
         junitVersion = '4.12'
         hamcrestVersion = '1.3'
-        kotlinVersion = '1.2.21'
-        runnerVersion = '1.0.1'
-        supportLibraryVersion = '27.0.2'
-        designLibraryVersion = '27.0.2'
-        archLifecycleVersion = '1.1.0'
-        dataBindingCompilerVersion = gradleVersion // Always need to be the same.
+        kotlinVersion = '1.3.21'
+        runnerExtVersion = '1.1.0'
+        rulesVersion = '1.0.1'
+        appCompatVersion = '1.0.2'
+        supportLibraryVersion = '1.0.2'
+        archLifecycleVersion = '2.1.0-alpha03'
     }
 
     repositories {

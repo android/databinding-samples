@@ -26,7 +26,7 @@ status:       PUBLISHED
 
 # See http://go/sample-categories
 technologies: [Android]
-categories:   [Architecture]
+categories:   [Data Binding]
 languages:    [Kotlin]
 solutions:    [Mobile]
 

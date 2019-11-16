@@ -24,13 +24,12 @@
 
         <variable
             name="viewmodel"
-            type="com.example.android.databinding.basicsample.data.ProfileObservableViewModel"/>
+            type="com.example.android.databinding.basicsample.data.ProfileLiveDataViewModel"/>
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.example.android.databinding.basicsample.ui.PojoActivity">
+        android:layout_height="match_parent">
 
         <!-- A simple binding between a TextView and a string observable in the ViewModel -->
         <TextView
@@ -163,5 +162,5 @@
             app:layout_constraintStart_toStartOf="@+id/like_button"
             app:layout_constraintTop_toBottomOf="@+id/like_button"
             tools:progressBackgroundTint="@android:color/darker_gray"/>
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

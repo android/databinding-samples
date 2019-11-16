@@ -17,13 +17,13 @@
 package com.example.android.databinding.twowaysample.ui
 
 import android.annotation.SuppressLint
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import android.content.Context
-import android.databinding.DataBindingUtil
-import android.databinding.Observable
-import android.databinding.ObservableInt
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.Observable
+import androidx.databinding.ObservableInt
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import com.example.android.databinding.twowaysample.BR
 import com.example.android.databinding.twowaysample.R

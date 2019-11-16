@@ -16,7 +16,7 @@
 
 package com.example.android.databinding.basicsample.util
 
-import android.databinding.BindingConversion
+import androidx.databinding.BindingConversion
 import android.view.View
 
 /**

@@ -16,8 +16,8 @@
 
 package com.example.android.databinding.basicsample.util
 
-import android.databinding.BindingMethod
-import android.databinding.BindingMethods
+import androidx.databinding.BindingMethod
+import androidx.databinding.BindingMethods
 import android.widget.ImageView
 
 
