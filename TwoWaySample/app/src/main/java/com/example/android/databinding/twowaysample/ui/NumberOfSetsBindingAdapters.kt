@@ -124,7 +124,7 @@ object NumberOfSetsConverters {
     /**
      * This is the Inverse Method used in `numberOfSets`, to convert from String to array.
      *
-     * Note that Context is passed
+     * Note that Context must be passed.
      */
     @JvmStatic fun stringToSetArray(unused: Context, value: String): Array<Int> {
         // Converts String to long

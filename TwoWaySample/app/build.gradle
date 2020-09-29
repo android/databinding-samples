@@ -39,6 +39,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    lintOptions {
+        disable 'Autofill', 'GoogleAppIndexingWarning', 'LabelFor'
+    }
     dataBinding {
         enabled true
     }
@@ -49,7 +52,6 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
-
     implementation "androidx.lifecycle:lifecycle-extensions:$archLifecycleVersion"
 
     testImplementation "junit:junit:$junitVersion"
