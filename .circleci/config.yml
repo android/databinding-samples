@@ -1,6 +1,6 @@
 version: 2
 
-config_android: &config_android
+config_android: &config_android 
   docker:
     - image: circleci/android:api-28
   working_directory: ~/project
@@ -9,7 +9,7 @@ config_android: &config_android
     GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2 -Dkotlin.incremental=false"
     TERM: dumb
 
-setup_ftl: &setup_ftl
+setup_ftl: &setup_ftl 
   - run:
       name: Authorize gcloud and set config defaults
       command: |
@@ -36,7 +36,7 @@ jobs:
             mkdir -p ~/junit/
             find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/junit/ \;
           when: always          
-      - store_test_results:
+      - store_test_results: 
           path: ~/junit
       - store_artifacts:
           path: ~/junit
