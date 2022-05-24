@@ -31,7 +31,7 @@ import com.example.android.databinding.basicsample.databinding.ObservableFieldPr
  */
 class ObservableFieldActivity : AppCompatActivity() {
 
-    private val observableFieldProfile = ObservableFieldProfile("Ada", "Lovelace", ObservableInt(0))
+    private val observableFieldProfile = ObservableFieldProfile("Yamashita", "Hiroyuki", ObservableInt(0))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
