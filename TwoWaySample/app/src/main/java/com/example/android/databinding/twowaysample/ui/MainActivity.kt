@@ -17,7 +17,7 @@
 package com.example.android.databinding.twowaysample.ui
 
 import android.annotation.SuppressLint
-import androidx.lifecycle.ViewModelProviders
+import androidx.activity.viewModels
 import android.content.Context
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.Observable
@@ -31,7 +31,6 @@ import com.example.android.databinding.twowaysample.data.IntervalTimerViewModel
 import com.example.android.databinding.twowaysample.data.IntervalTimerViewModelFactory
 import com.example.android.databinding.twowaysample.databinding.IntervalTimerBinding
 
-
 const val SHARED_PREFS_KEY = "timer"
 
 /**
@@ -44,10 +43,10 @@ const val SHARED_PREFS_KEY = "timer"
 class MainActivity : AppCompatActivity() {
 
     private val intervalTimerViewModel: IntervalTimerViewModel
-        by lazy {
-            ViewModelProviders.of(this, IntervalTimerViewModelFactory)
-                    .get(IntervalTimerViewModel::class.java)
-        }
+        by viewModels(
+            factoryProducer = { IntervalTimerViewModelFactory }
+        )
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
