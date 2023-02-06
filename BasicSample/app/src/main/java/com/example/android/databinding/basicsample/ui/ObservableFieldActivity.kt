@@ -18,7 +18,10 @@ package com.example.android.databinding.basicsample.ui
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
+import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ObservableInt
 import com.example.android.databinding.basicsample.R
@@ -49,4 +52,13 @@ class ObservableFieldActivity : AppCompatActivity() {
     fun onLike(view: View) {
         observableFieldProfile.likes.set(observableFieldProfile.likes.get() + 1)
     }
+}
+
+/**
+ * Adds support for binding tints to AppCompatImageView.
+ * See related [bug](https://b.corp.google.com/issues/152953070?pli=1)
+ */
+@BindingAdapter("app:tint")
+fun ImageView.setImageTint(@ColorInt color: Int) {
+    setColorFilter(color)
 }

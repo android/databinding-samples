@@ -25,7 +25,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -33,7 +34,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.ObservableFieldActivity"
-                  android:label="ObservableField Activity">
+                  android:label="ObservableField Activity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -41,7 +43,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.ViewModelActivity"
-                  android:label="ViewModel Activity">
+                  android:label="ViewModel Activity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

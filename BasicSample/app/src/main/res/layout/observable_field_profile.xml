@@ -79,7 +79,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
             app:layout_constraintVertical_chainStyle="packed"
-            android:tint="@{user.likes &gt; 9 ? @color/star : @android:color/black}"
+            app:tint="@{user.likes &gt; 9 ? @color/star : @android:color/black}"
             app:srcCompat="@{user.likes &lt; 4 ? R.drawable.ic_person_black_96dp : R.drawable.ic_whatshot_black_96dp }"/>
 
         <!-- Conversions like Integer to String are expressions simple enough for the layout. An

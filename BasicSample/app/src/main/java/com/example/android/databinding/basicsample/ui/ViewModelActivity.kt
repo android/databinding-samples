@@ -17,16 +17,16 @@
 package com.example.android.databinding.basicsample.ui
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProviders
 import com.example.android.databinding.basicsample.R
 import com.example.android.databinding.basicsample.data.ProfileLiveDataViewModel
 import com.example.android.databinding.basicsample.databinding.ViewmodelProfileBinding
 
 /**
- * This activity uses a [android.arch.lifecycle.ViewModel] to hold the data and respond to user
- * actions. Also, the layout uses [android.databinding.BindingAdapter]s instead of expressions
+ * This activity uses a [androidx.lifecycle.ViewModel] to hold the data and respond to user
+ * actions. Also, the layout uses [androidx.databinding.BindingAdapter]s instead of expressions
  * which are much more powerful.
  *
  * @see com.example.android.databinding.basicsample.util.BindingAdapters
@@ -36,7 +36,7 @@ class ViewModelActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         // Obtain ViewModel from ViewModelProviders
-        val viewModel = ViewModelProviders.of(this).get(ProfileLiveDataViewModel::class.java)
+        val viewModel by viewModels<ProfileLiveDataViewModel>()
 
         // An alternative ViewModel using Observable fields and @Bindable properties can be used:
         // val viewModel = ViewModelProviders.of(this).get(ProfileObservableViewModel::class.java)
