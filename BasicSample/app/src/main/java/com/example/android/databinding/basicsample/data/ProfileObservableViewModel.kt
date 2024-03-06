@@ -20,8 +20,8 @@ import androidx.databinding.Bindable
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.map
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.example.android.databinding.basicsample.BR
 import com.example.android.databinding.basicsample.util.ObservableViewModel
@@ -41,7 +41,7 @@ class ProfileLiveDataViewModel : ViewModel() {
     val likes: LiveData<Int> = _likes
 
     // popularity is exposed as LiveData using a Transformation instead of a @Bindable property.
-    val popularity: LiveData<Popularity> = Transformations.map(_likes) {
+    val popularity: LiveData<Popularity> = _likes.map {
         when {
             it > 9 -> Popularity.STAR
             it > 4 -> Popularity.POPULAR
