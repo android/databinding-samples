@@ -21,6 +21,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
+    namespace 'com.example.android.databinding.basicsample'
     compileSdkVersion rootProject.compileSdkVersion
     defaultConfig {
         applicationId "com.example.android.databinding.basicsample"
@@ -40,6 +41,10 @@ android {
     buildFeatures {
         dataBinding true
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }    
 }
 
 dependencies {
