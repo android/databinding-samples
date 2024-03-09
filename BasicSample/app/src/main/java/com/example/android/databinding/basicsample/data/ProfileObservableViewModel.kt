@@ -73,13 +73,29 @@ class ProfileObservableViewModel : ObservableViewModel() {
 
     @Bindable
     fun getPopularity(): Popularity {
-        return likes.get().let {
-            when {
-                it > 9 -> Popularity.STAR
-                it > 4 -> Popularity.POPULAR
-                else -> Popularity.NORMAL
-            }
-        }
+        return likes.get().let { decidePopularity(it) }
+    }
+}
+
+/**
+ * As an alternative, the @Bindable attribute can be replaced with an
+ * `ObservableField`. In this case 'popularity' is an `ObservableField` which has to be computed when
+ * `likes` change.
+ */
+class ProfileObservableFieldsViewModel : ViewModel() {
+    val name = ObservableField("Ada")
+    val lastName = ObservableField("Lovelace")
+    val likes =  ObservableInt(0)
+
+    // popularity is exposed as an ObservableField instead of a @Bindable property.
+    val popularity = ObservableField<Popularity>(Popularity.NORMAL)
+
+    fun onLike() {
+        likes.set(likes.get() + 1)
+
+        popularity.set(
+                likes.get().let { decidePopularity(it) }
+        )
     }
 }
 
@@ -91,4 +107,12 @@ enum class Popularity {
 
 private fun ObservableInt.increment() {
     set(get() + 1)
+}
+
+private fun decidePopularity(likes: Int) : Popularity {
+    return when {
+        likes > 9 -> Popularity.STAR
+        likes > 4 -> Popularity.POPULAR
+        else -> Popularity.NORMAL
+    }
 }
