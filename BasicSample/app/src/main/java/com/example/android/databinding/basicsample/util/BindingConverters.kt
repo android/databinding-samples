@@ -21,7 +21,7 @@ import android.view.View
 
 /**
  * In order to show a View only when it has more than 0 likes, we pass this expression to its
- * visibilty property:
+ * visibility property:
  *
  * `android:visibility="@{ConverterUtil.isZero(viewmodel.likes)}"`
  *
