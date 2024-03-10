@@ -1,6 +1,9 @@
 Android Data Binding Basic Sample
 =============================================
+Simple demo of the Data Binding library (layout variables/experessions, observability, binding adapters, integration with ViewModels, etc.).
 
+Introduction
+------------
 This sample showcases the following features of the
 [Data Binding library](https://developer.android.com/topic/libraries/data-binding/index.html):
 

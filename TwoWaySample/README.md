@@ -1,6 +1,9 @@
 Android Data Binding Advanced Sample
 =============================================
+More complex demo of the Data Binding library (two-way binding, alternatives, adapters, animations, converters, view models, testing, etc.).
 
+Introduction
+------------
 This sample showcases the following features
 of the [Data Binding library](https://developer.android.com/topic/libraries/data-binding/index.html)
 with an app that shows a workout timer.
