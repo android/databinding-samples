@@ -32,8 +32,8 @@ import com.example.android.databinding.basicsample.util.ObservableViewModel
  * changes to any of the exposed observables automatically refresh the UI. *
  */
 class ProfileLiveDataViewModel : ViewModel() {
-    private val _name = MutableLiveData("Ada")
-    private val _lastName = MutableLiveData("Lovelace")
+    private val _name = MutableLiveData("Yamashita")
+    private val _lastName = MutableLiveData("Hiroyuki")
     private val _likes =  MutableLiveData(0)
 
     val name: LiveData<String> = _name
@@ -61,8 +61,8 @@ class ProfileLiveDataViewModel : ViewModel() {
  * `notifyPropertyChanged` when any of the dependent properties change (`likes` in this case).
  */
 class ProfileObservableViewModel : ObservableViewModel() {
-    val name = ObservableField("Ada")
-    val lastName = ObservableField("Lovelace")
+    val name = ObservableField("Yamashita")
+    val lastName = ObservableField("Hiroyuki")
     val likes =  ObservableInt(0)
 
     fun onLike() {
